@@ -1,0 +1,23 @@
+language: python
+install: pip install tox-travis
+script: tox
+stages:
+  - name: test
+  - name: build
+    if: type = push AND branch = master
+jobs:
+  include:
+    - stage: test
+      python: 3.7
+    - stage: test
+      python: 3.8
+    - stage: build
+      name: 'PyPI upload'
+      python: 3.7
+      deploy:
+        provider: pypi
+        user: DeanWay
+        password:
+          secure: ZXy6gVUxJg9/qzxVSy20DkN/tm5EboHzlA2pjifzGojGDTt3+vNW/OtagiwTIFHd69/xSzbU3IkD17ruoH5aabtatAObUVIRrssQGWpWcHMc0to6jsnzGsZ6TXsyIo0G6KsOaubVT8jw1HNgk9ZT22AL2nUJsvyeXeQa7hLZleRoeeEt/5ascdFiFRGaEKPXQnFYe83GoPYepdV2QDVW7pEIDG/8X8UNvhJn2iwQp8LhMvi8hqwzNQlQUcdOSUODiXS2JdhOlAw6VkLNm0bvbQj+91QmlOJU7bfqZoN8t4e+KuweXyVT5Om26z4YlOvHIjviFn52mGYTBkgey4QdALeE+VJ5z1pAEtRPXaoP5WkHKUJ4W4v/7Cvgd1tULjXklMcrXygml3x61jxzUw2apaMnRb8eteuAxjqd91HGDBBUvWqzr3XUv8g7nJRfwUT0CjYjvxo6fP9jfqA9szaoJpmiidWt0AiqEnR+O65AjXnWeMzbQHHyHwqu2+hAhHyAyde7g6ZOVrG/59XJ2aKoOHsAFK0w65WFYuPMnEv52mon78rC/8GDniTmgatfYC63m0NvpVMcxcKXAT5ImaOUnSu6O2vuHStqOihpoC2VeZrAccmU3/yeZtTAPsVaFa50MMUtK2uwqAqghOiaLQjYY4HQQMrra4wDBtEeGFJ9P04=
+        on:
+          tags: true
