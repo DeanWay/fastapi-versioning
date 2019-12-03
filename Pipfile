@@ -10,6 +10,7 @@ starlette = "*"
 tox = "*"
 pytest = "*"
 typing_extensions = "*"
+bumpversion = "*"
 
 [packages]
 fastapi-versioning = {path = ".",editable = true}
