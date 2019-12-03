@@ -42,3 +42,8 @@ def get_item_v2(item_id: str):
     price=1.2,
     quantity=[{'store_id': '1', 'quantity': 5}],
   )
+
+@router.delete('/item/{item_id}')
+@version(1, 2)
+def delete_item(item_id: str):
+  return None

@@ -32,7 +32,7 @@ def VersionedFastAPI(
     for version, route in map(version_to_route, app.routes):
         version_route_mapping[version].append(route)
 
-    path_to_route = {}
+    unique_routes = {}
     for version in sorted(version_route_mapping.keys()):
         major, minor = version
         prefix = prefix_format.format(major=major, minor=minor)
@@ -43,8 +43,9 @@ def VersionedFastAPI(
             openapi_prefix=prefix,
         )
         for route in version_route_mapping[version]:
-            path_to_route[route.path] = route
-        for route in path_to_route.values():
+            for method in route.methods:
+                unique_routes[route.path + '|' + method] = route
+        for route in unique_routes.values():
             versioned_app.router.routes.append(route)
         parent_app.mount(prefix, versioned_app)
         @parent_app.get(
