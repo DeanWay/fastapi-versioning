@@ -7,9 +7,11 @@ verify_ssl = true
 fastapi = "*"
 uvicorn = "*"
 starlette = "*"
+tox = "*"
+pytest = "*"
 
 [packages]
-
+fastapi-versioning = {path = ".",editable = true}
 
 [requires]
 python_version = "3.7"
