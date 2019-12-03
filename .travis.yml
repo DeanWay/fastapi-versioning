@@ -4,7 +4,7 @@ script: tox
 stages:
   - name: test
   - name: build
-    if: type = push AND branch = master
+    if: type = push AND tag is present
 jobs:
   include:
     - stage: test
