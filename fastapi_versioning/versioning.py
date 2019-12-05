@@ -10,12 +10,12 @@ from starlette.types import Scope
 
 def version(major: int, minor: int):
     def decorator(func: Callable) -> Callable:
-        func.__api_version__ = (major, minor)
+        func._api_version = (major, minor)
         return func
     return decorator
 
 def version_to_route(route: APIRoute) -> Tuple[int, APIRoute]:
-    version = getattr(route.endpoint, '__api_version__', (1, 0))
+    version = getattr(route.endpoint, '_api_version', (1, 0))
     return version, route
 
 def VersionedFastAPI(

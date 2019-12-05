@@ -11,6 +11,7 @@ tox = "*"
 pytest = "*"
 typing_extensions = "*"
 bumpversion = "*"
+requests = "*"
 
 [packages]
 fastapi-versioning = {path = ".",editable = true}
