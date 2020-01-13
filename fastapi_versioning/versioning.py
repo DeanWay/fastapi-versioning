@@ -8,7 +8,7 @@ from starlette.routing import Match
 from starlette.types import Scope
 
 
-def version(major: int, minor: int):
+def version(major: int, minor: int = 0):
     def decorator(func: Callable) -> Callable:
         func._api_version = (major, minor)
         return func
