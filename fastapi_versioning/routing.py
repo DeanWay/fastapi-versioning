@@ -2,6 +2,7 @@ from typing import Type
 
 from fastapi.routing import APIRoute
 
+
 def versioned_api_route(
     major: int = 1,
     minor: int = 0,

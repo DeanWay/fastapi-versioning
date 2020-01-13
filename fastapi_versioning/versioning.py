@@ -14,9 +14,11 @@ def version(major: int, minor: int = 0):
         return func
     return decorator
 
+
 def version_to_route(route: APIRoute) -> Tuple[int, APIRoute]:
     version = getattr(route.endpoint, '_api_version', (1, 0))
     return version, route
+
 
 def VersionedFastAPI(
     app: FastAPI,
@@ -48,6 +50,7 @@ def VersionedFastAPI(
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
         parent_app.mount(prefix, versioned_app)
+        
         @parent_app.get(
             f'{prefix}/openapi.json',
             name=semver,
