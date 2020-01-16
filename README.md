@@ -67,7 +67,7 @@ app = VersionedFastAPI(app,
 this will generate two endpoints:
 ```
 /v1/greet
-/v1/greet
+/v2/greet
 ```
 as well as:
 ```
