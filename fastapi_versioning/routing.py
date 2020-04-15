@@ -11,5 +11,9 @@ def versioned_api_route(
     class VersionedAPIRoute(route_class):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.endpoint._api_version = (major, minor)
+            try:
+                self.endpoint._api_version = (major, minor)
+            except AttributeError:
+                # Support bound methods                 
+                self.endpoint.__func__._api_version = (major, minor)
     return VersionedAPIRoute
