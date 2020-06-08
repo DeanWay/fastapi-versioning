@@ -41,6 +41,7 @@ def VersionedFastAPI(
         semver = version_format.format(major=major, minor=minor)
         versioned_app = FastAPI(
             title=app.title,
+            description=app.description,
             version=semver,
             openapi_prefix=prefix,
         )
