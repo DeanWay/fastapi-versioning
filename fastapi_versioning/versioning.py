@@ -1,4 +1,5 @@
 from collections import defaultdict
+from functools import wraps
 from typing import Tuple, Callable, Dict, List
 
 from fastapi import FastAPI
@@ -8,10 +9,16 @@ from starlette.routing import Match
 from starlette.types import Scope
 
 
-def version(major: int, minor: int = 0):
+def version(major: int, minor: int = 0) -> Callable:
+
     def decorator(func: Callable) -> Callable:
-        func._api_version = (major, minor)
-        return func
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            func._api_version = (major, minor)
+
+            return func(*args, **kwargs)
+
     return decorator
 
 
