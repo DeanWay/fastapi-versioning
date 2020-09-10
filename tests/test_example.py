@@ -2,6 +2,7 @@ from starlette.testclient import TestClient
 
 from example.annotation.app import app as annotation_app
 from example.router.app import app as router_app
+from example.custom_default_version.app import app as default_version_app
 
 
 def test_annotation_app():
@@ -43,3 +44,14 @@ def test_router_app():
     assert test_client.delete('/v1_0/greet').status_code == 405
     assert test_client.delete('/v1_1/greet').status_code == 200
     assert test_client.delete('/v1_1/greet').json() == 'Goodbye'
+
+
+def test_default_version():
+    test_client = TestClient(default_version_app)
+    assert test_client.get('/docs').status_code == 200
+    assert test_client.get('/v1_0/docs').status_code == 404
+    assert test_client.get('/v2_0/docs').status_code == 200
+    assert test_client.get('/v3_0/docs').status_code == 200
+
+    assert test_client.get('/v2_0/').json() == 'Hello default version 2.0!'
+    assert test_client.get('/v3_0/').json() == "Hello version 3.0!"
