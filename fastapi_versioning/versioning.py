@@ -15,7 +15,7 @@ def version(major: int, minor: int = 0):
     return decorator
 
 
-def version_to_route(route: APIRoute) -> Tuple[int, APIRoute]:
+def version_to_route(route: APIRoute) -> Tuple[Tuple[int, int], APIRoute]:
     version = getattr(route.endpoint, '_api_version', (1, 0))
     return version, route
 
