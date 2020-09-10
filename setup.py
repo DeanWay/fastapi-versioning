@@ -21,5 +21,5 @@ setup(
         "fastapi>=0.56.0",
         "starlette",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.6',
 )

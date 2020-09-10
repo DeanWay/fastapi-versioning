@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "227bf4dc1b6b35549360933686c7c9841de2813ee6095585fcdb72b4bcbc99a0"
+            "sha256": "c6f781f65ecb0f2d6c4f9fda56768b9fe2a96b17ca18ac2cd241d29f5d4a502c"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.7"
+            "python_version": "3.6"
         },
         "sources": [
             {
@@ -16,6 +16,14 @@
         ]
     },
     "default": {
+        "dataclasses": {
+            "hashes": [
+                "sha256:0201d89fa866f68c8ebd9d08ee6ff50c0b255f8ec63a71c16fda7af82bb887bf",
+                "sha256:8479067f342acf957dc82ec415d355ab5edb7e7646b90dc6e2fd1d96ad084c97"
+            ],
+            "markers": "python_version < '3.7'",
+            "version": "==0.8"
+        },
         "fastapi": {
             "hashes": [
                 "sha256:63c4592f5ef3edf30afa9a44fa7c6b7ccb20e0d3f68cd9eba07b44d552058dcb",
@@ -63,10 +71,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==0.13.6"
-        },
-        "zipp": {
-            "editable": true,
-            "path": "."
         }
     },
     "develop": {
@@ -161,6 +165,14 @@
             ],
             "markers": "python_version < '3.8' and python_version < '3.8'",
             "version": "==3.4.0"
+        },
+        "importlib-resources": {
+            "hashes": [
+                "sha256:885b8eae589179f661c909d699a546cf10d83692553e34dca1bf5eb06f7f6217",
+                "sha256:bfdad047bce441405a49cf8eb48ddce5e56c696e185f59147a8b79e75e9e6380"
+            ],
+            "markers": "python_version < '3.7'",
+            "version": "==5.1.0"
         },
         "iniconfig": {
             "hashes": [
@@ -275,8 +287,12 @@
             "version": "==20.4.2"
         },
         "zipp": {
-            "editable": true,
-            "path": "."
+            "hashes": [
+                "sha256:102c24ef8f171fd729d46599845e95c7ab894a4cf45f5de11a44cc7444fb1108",
+                "sha256:ed5eee1974372595f9e416cc7bbeeb12335201d8081ca8a0743c954d4446e5cb"
+            ],
+            "markers": "python_version < '3.8'",
+            "version": "==3.4.0"
         }
     }
 }
