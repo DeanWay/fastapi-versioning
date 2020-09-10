@@ -16,4 +16,4 @@ fastapi = ">=0.56.0"
 fastapi-versioning = {path = ".",editable = true}
 
 [requires]
-python_version = "3.6"
+python_version = ">=3.6"
