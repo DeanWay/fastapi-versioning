@@ -118,7 +118,7 @@ def last_version(request: Request):
 app = VersionedFastAPI(app,
     version_format='{major}',
     prefix_format='/v{major}',
-    description='Greet uses with a nice message',
+    description='Greet users with a nice message',
     middleware=[
         Middleware(SessionMiddleware, secret_key='mysecretkey')
     ]
