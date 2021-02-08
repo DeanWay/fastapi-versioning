@@ -1,6 +1,10 @@
 # fastapi-versioning
 api versioning for fastapi web applications
 
+# Installation
+
+`pip install fastapi-versioning`
+
 ## Examples
 ```python
 from fastapi import FastAPI
