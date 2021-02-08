@@ -49,7 +49,7 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
-            openapi_prefix=prefix,
+            root_path=prefix,
         )
         for route in version_route_mapping[version]:
             for method in route.methods:
