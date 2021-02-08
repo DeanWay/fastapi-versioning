@@ -13,7 +13,5 @@ requests = "*"
 
 [packages]
 fastapi = ">=0.56.0"
+starlette = "==0.13.6"
 fastapi-versioning = {path = ".",editable = true}
-
-[requires]
-python_version = "3.7"
