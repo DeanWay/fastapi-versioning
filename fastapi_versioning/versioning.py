@@ -1,22 +1,26 @@
 from collections import defaultdict
-from typing import Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple, TypeVar
 
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
+from starlette.routing import BaseRoute
+
+CallableT = TypeVar("CallableT", bound=Callable[..., Any])
 
 
-def version(major: int, minor: int = 0):
-    def decorator(func: Callable) -> Callable:
-        func._api_version = (major, minor)
+def version(major: int, minor: int = 0) -> Callable[[CallableT], CallableT]:
+    def decorator(func: CallableT) -> CallableT:
+        func._api_version = (major, minor)  # type: ignore
         return func
 
     return decorator
 
 
 def version_to_route(
-    route: APIRoute,
+    route: BaseRoute,
     default_version: Tuple[int, int],
 ) -> Tuple[Tuple[int, int], APIRoute]:
+    assert isinstance(route, APIRoute)
     version = getattr(route.endpoint, "_api_version", default_version)
     return version, route
 
@@ -26,13 +30,15 @@ def VersionedFastAPI(
     version_format: str = "{major}.{minor}",
     prefix_format: str = "/v{major}_{minor}",
     default_version: Tuple[int, int] = (1, 0),
-    **kwargs,
+    **kwargs: Any,
 ) -> FastAPI:
     parent_app = FastAPI(
         title=app.title,
         **kwargs,
     )
-    version_route_mapping: Dict[str, List[APIRoute]] = defaultdict(list)
+    version_route_mapping: Dict[Tuple[int, int], List[APIRoute]] = defaultdict(
+        list
+    )
     version_routes = [
         version_to_route(route, default_version) for route in app.routes
     ]
@@ -61,7 +67,7 @@ def VersionedFastAPI(
         @parent_app.get(
             f"{prefix}/openapi.json", name=semver, tags=["Versions"]
         )
-        def noop():
+        def noop() -> None:
             ...
 
     return parent_app

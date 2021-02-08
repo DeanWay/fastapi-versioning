@@ -4,4 +4,3 @@ cd ..
 
 mypy fastapi_versioning/
 mypy tests/
-mypy example/

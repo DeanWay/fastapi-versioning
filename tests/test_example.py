@@ -5,7 +5,7 @@ from example.custom_default_version.app import app as default_version_app
 from example.router.app import app as router_app
 
 
-def test_annotation_app():
+def test_annotation_app() -> None:
     test_client = TestClient(annotation_app)
     assert test_client.get("/docs").status_code == 200
     assert test_client.get("/v1_0/docs").status_code == 200
@@ -35,7 +35,7 @@ def test_annotation_app():
     assert test_client.get("/v1_3/store/1").status_code == 404
 
 
-def test_router_app():
+def test_router_app() -> None:
     test_client = TestClient(router_app)
     assert test_client.get("/docs").status_code == 200
     assert test_client.get("/v1_0/docs").status_code == 200
@@ -50,7 +50,7 @@ def test_router_app():
     assert test_client.delete("/v1_1/greet").json() == "Goodbye"
 
 
-def test_default_version():
+def test_default_version() -> None:
     test_client = TestClient(default_version_app)
     assert test_client.get("/docs").status_code == 200
     assert test_client.get("/v1_0/docs").status_code == 404
