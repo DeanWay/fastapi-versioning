@@ -4,9 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-fastapi = "*"
 uvicorn = "*"
-starlette = "*"
 tox = "*"
 pytest = "*"
 typing_extensions = "*"
@@ -14,6 +12,7 @@ bumpversion = "*"
 requests = "*"
 
 [packages]
+fastapi = ">=0.56.0"
 fastapi-versioning = {path = ".",editable = true}
 
 [requires]
