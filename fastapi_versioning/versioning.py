@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Any, Callable, Dict, List, Tuple, TypeVar
+from typing import Any, Callable, Dict, List, Tuple, TypeVar, cast
 
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
@@ -20,9 +20,9 @@ def version_to_route(
     route: BaseRoute,
     default_version: Tuple[int, int],
 ) -> Tuple[Tuple[int, int], APIRoute]:
-    assert isinstance(route, APIRoute)
-    version = getattr(route.endpoint, "_api_version", default_version)
-    return version, route
+    api_route = cast(APIRoute, route)
+    version = getattr(api_route.endpoint, "_api_version", default_version)
+    return version, api_route
 
 
 def VersionedFastAPI(
