@@ -12,6 +12,9 @@ class Item(BaseModel):
     id: str
     name: str
     price: float
+
+
+class ItemV1(Item):
     quantity: int
 
 
@@ -24,10 +27,10 @@ class ItemV2(Item):
     quantity: List[ComplexQuantity]
 
 
-@router.get("/item/{item_id}", response_model=Item)
+@router.get("/item/{item_id}", response_model=ItemV1)
 @version(1, 1)
-def get_item_v1(item_id: str):
-    return Item(
+def get_item_v1(item_id: str) -> ItemV1:
+    return ItemV1(
         id=item_id,
         name="ice cream",
         price=1.2,
@@ -37,7 +40,7 @@ def get_item_v1(item_id: str):
 
 @router.get("/item/{item_id}", response_model=ItemV2)
 @version(1, 2)
-def get_item_v2(item_id: str):
+def get_item_v2(item_id: str) -> ItemV2:
     return ItemV2(
         id=item_id,
         name="ice cream",
@@ -48,5 +51,5 @@ def get_item_v2(item_id: str):
 
 @router.delete("/item/{item_id}")
 @version(1, 2)
-def delete_item(item_id: str):
+def delete_item(item_id: str) -> None:
     return None

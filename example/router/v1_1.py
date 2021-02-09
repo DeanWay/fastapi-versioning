@@ -6,10 +6,10 @@ router = APIRouter(route_class=versioned_api_route(1, 1))
 
 
 @router.get("/greet")
-def greet():
+def greet() -> str:
     return "Hi"
 
 
 @router.delete("/greet")
-def goodbye():
+def goodbye() -> str:
     return "Goodbye"

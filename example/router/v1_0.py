@@ -4,5 +4,5 @@ router = APIRouter()
 
 
 @router.get("/greet")
-def greet():
+def greet() -> str:
     return "Hello"
