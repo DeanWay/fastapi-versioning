@@ -10,19 +10,23 @@ api versioning for fastapi web applications
 from fastapi import FastAPI
 from fastapi_versioning import VersionedFastAPI, version
 
-app = FastAPI(title='My App')
+app = FastAPI(title="My App")
 
-@app.get('/greet')
+
+@app.get("/")
 @version(1, 0)
-def greet():
-  return 'Hello'
+def greet_with_hello():
+    return "Hello"
 
-@app.get('/greet')
+
+@app.get("/")
 @version(1, 1)
-def greet():
-  return 'Hi'
+def greet_with_hi():
+    return "Hi"
+
 
 app = VersionedFastAPI(app)
+)
 ```
 
 this will generate two endpoints:

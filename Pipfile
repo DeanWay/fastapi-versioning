@@ -10,6 +10,10 @@ pytest = "*"
 typing_extensions = "*"
 bumpversion = "*"
 requests = "*"
+mypy = "*"
+black = "==20.8b1"
+isort = "*"
+flake8 = "*"
 
 [packages]
 fastapi = ">=0.56.0"

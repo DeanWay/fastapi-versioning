@@ -11,7 +11,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/DeanWay/fastapi-versioning",
-    packages=['fastapi_versioning'],
+    packages=["fastapi_versioning"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
@@ -23,5 +23,5 @@ setup(
         "fastapi>=0.56.0",
         "starlette",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
