@@ -3,8 +3,6 @@ install: pip install tox-travis
 script: tox
 stages:
   - name: test
-  - name: build
-    if: type = push AND tag is present
 jobs:
   include:
     - stage: test
@@ -13,13 +11,3 @@ jobs:
       python: 3.7
     - stage: test
       python: 3.8
-    - stage: build
-      name: 'PyPI upload'
-      python: 3.7
-      deploy:
-        provider: pypi
-        user: DeanWay
-        password:
-          secure: bIvoibscxK4le0AGLZsWkNystos/Uf/HWqg4mfFgz1MQp6RHouWB5XTqdhxzwoJ2UVuuXs0cMsmn+4nAsalE9wIZmjLftKEOsFVg4CZ5bRCHHO0qDxH5ZoOYmOCIM0A2W5B+oWLZI8FupDXcub54fDucy+jz8QZnPVmFHDBbnXeNfnKEaggiNx4ixqa0Afut4Kw7j41gB+nNs9YJu9QSDZAt304iQHmormKXB6IZDwmMibjIeLITK4n4G+tGN4AnK6lBiQjO14fEjIa0M1ePlUuHKgg2mKhfxp36k0/3E4QJgc/yx1heEApmXGWNkXC+anzMxUuO0xqMUGsYoBVDbbanUACoLuKq+R5QQVNgFGcRRK/F/SpbUnhylB9FxB9OFhfq6Q+kL8DoH9incg9u49ZvXiX3X8+T5x9LWlZ4q2pePmnReYv12G/hGG02Dn3Q1GDgC+KFvzCIybQh50Cd2oYj6YmrRQUB+HMsNRcOj211obiKKARs6HjemIcnYToKdpWK4wa30jqncaeFljdFfpoR8sKgFSwtVJFdv8xcUn/F3Vdr3P7BtNUkbs8V9LOqIIHmQIA2D2/iGqVzNNpOR6Hmv9eHibo0soH4uz6HZCFThhqhFx5ybFDqeiMNhJnwDQlD2GJcEyjZ1FVM7bK+rwpeWoBZhOFSo5cMWO9F9GU=
-        on:
-          tags: true
