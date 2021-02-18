@@ -36,6 +36,7 @@ def VersionedFastAPI(
         title=app.title,
         **kwargs,
     )
+    parent_app.dependency_overrides = app.dependency_overrides
     version_route_mapping: Dict[Tuple[int, int], List[APIRoute]] = defaultdict(
         list
     )
