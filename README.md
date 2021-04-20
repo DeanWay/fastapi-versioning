@@ -26,7 +26,6 @@ def greet_with_hi():
 
 
 app = VersionedFastAPI(app)
-)
 ```
 
 this will generate two endpoints:
