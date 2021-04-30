@@ -3,6 +3,7 @@ from typing import Any, Callable, Dict, List, Tuple, TypeVar, cast
 
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
+from starlette.responses import RedirectResponse, Response
 from starlette.routing import BaseRoute
 
 CallableT = TypeVar("CallableT", bound=Callable[..., Any])
@@ -30,6 +31,7 @@ def VersionedFastAPI(
     version_format: str = "{major}.{minor}",
     prefix_format: str = "/v{major}_{minor}",
     default_version: Tuple[int, int] = (1, 0),
+    enable_latest: bool = False,
     **kwargs: Any,
 ) -> FastAPI:
     parent_app = FastAPI(
@@ -47,7 +49,8 @@ def VersionedFastAPI(
         version_route_mapping[version].append(route)
 
     unique_routes = {}
-    for version in sorted(version_route_mapping.keys()):
+    versions = sorted(version_route_mapping.keys())
+    for version in versions:
         major, minor = version
         prefix = prefix_format.format(major=major, minor=minor)
         semver = version_format.format(major=major, minor=minor)
@@ -70,5 +73,17 @@ def VersionedFastAPI(
         @parent_app.get(f"{prefix}/docs", name=semver, tags=["Documentations"])
         def noop() -> None:
             ...
+
+    # Use latest endpoint to point to the latest API version available
+    if enable_latest:
+        latest_version = versions[-1]
+        major, minor = latest_version
+        prefix = prefix_format.format(major=major, minor=minor)
+        semver = version_format.format(major=major, minor=minor)
+
+        @parent_app.get("/latest/{version_path:path}", name=semver, tags=["Redirect"])
+        def redirect(version_path: str) -> Response:
+            response = RedirectResponse(url=f"{prefix}/{version_path}")
+            return response
 
     return parent_app
