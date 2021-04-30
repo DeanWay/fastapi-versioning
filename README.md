@@ -43,6 +43,22 @@ as well as:
 /v1_1/openapi.json
 ```
 
+There's also the possibility of adding a set of additional endpoints that
+redirect the most recent API version. To do that make the argument
+`enable_latest` true:
+
+```python
+app = VersionedFastAPI(app, enable_latest=True)
+```
+
+this will generate the following additional endpoints:
+```
+/latest/greet
+/latest/docs
+/latest/openapi.json
+```
+In this example, `/latest` endpoints will reflect the same data as `/v1.1`.
+
 Try it out:
 ```
 pip install pipenv
