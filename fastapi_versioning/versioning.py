@@ -67,6 +67,7 @@ def VersionedFastAPI(
         @parent_app.get(
             f"{prefix}/openapi.json", name=semver, tags=["Versions"]
         )
+        @parent_app.get(f"{prefix}/docs", name=semver, tags=["Documentations"])
         def noop() -> None:
             ...
 
