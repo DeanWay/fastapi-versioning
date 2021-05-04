@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="fastapi_versioning",
-    version="0.8.0",
+    version="0.9.0",
     author="Dean Way",
     description="api versioning for fastapi web applications",
     long_description=long_description,
