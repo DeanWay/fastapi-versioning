@@ -12,6 +12,7 @@ def test_annotation_app() -> None:
     assert test_client.get("/v1_1/docs").status_code == 200
     assert test_client.get("/v1_2/docs").status_code == 200
     assert test_client.get("/v1_3/docs").status_code == 200
+    assert test_client.get("/latest/docs").status_code == 200
     assert test_client.get("/v1_4/docs").status_code == 404
 
     assert test_client.get("/v1_0/item/1").status_code == 404
@@ -23,6 +24,10 @@ def test_annotation_app() -> None:
     )
     assert (
         test_client.get("/v1_3/item/1").json()["quantity"] == complex_quantity
+    )
+    assert (
+        test_client.get("/latest/item/1").json()["quantity"]
+        == complex_quantity
     )
 
     assert test_client.delete("/v1_1/item/1").status_code == 405
