@@ -13,13 +13,13 @@ from fastapi_versioning import VersionedFastAPI, version
 app = FastAPI(title="My App")
 
 
-@app.get("/")
+@app.get("/greet")
 @version(1, 0)
 def greet_with_hello():
     return "Hello"
 
 
-@app.get("/")
+@app.get("/greet")
 @version(1, 1)
 def greet_with_hi():
     return "Hi"
