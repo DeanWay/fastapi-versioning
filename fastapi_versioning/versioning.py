@@ -81,7 +81,9 @@ def VersionedFastAPI(
         prefix = prefix_format.format(major=major, minor=minor)
         semver = version_format.format(major=major, minor=minor)
 
-        @parent_app.get("/latest/{version_path:path}", name=semver, tags=["Redirect"])
+        @parent_app.get(
+            "/latest/{version_path:path}", name=semver, tags=["Redirect"]
+        )
         def redirect(version_path: str) -> Response:
             response = RedirectResponse(url=f"{prefix}/{version_path}")
             return response
