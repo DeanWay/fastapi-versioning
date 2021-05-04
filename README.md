@@ -43,10 +43,11 @@ as well as:
 ```
 
 Try it out:
-```
+```sh
 pip install pipenv
 pipenv install --dev
-pipenv run uvicorn example.app:app
+pipenv run uvicorn example.annotation.app:app
+# pipenv run uvicorn example.folder_name.app:app
 ```
 
 ## Usage without minor version
