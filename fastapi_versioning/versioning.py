@@ -74,18 +74,18 @@ def VersionedFastAPI(
         def noop() -> None:
             ...
 
-    # Use latest endpoint to point to the latest API version available
     if enable_latest:
-        latest_version = versions[-1]
-        major, minor = latest_version
-        prefix = prefix_format.format(major=major, minor=minor)
+        prefix = "/latest"
+        major, minor = version
         semver = version_format.format(major=major, minor=minor)
-
-        @parent_app.get(
-            "/latest/{version_path:path}", name=semver, tags=["Redirect"]
+        versioned_app = FastAPI(
+            title=app.title,
+            description=app.description,
+            version=semver,
+            root_path=prefix,
         )
-        def redirect(version_path: str) -> Response:
-            response = RedirectResponse(url=f"{prefix}/{version_path}")
-            return response
+        for route in unique_routes.values():
+            versioned_app.router.routes.append(route)
+        parent_app.mount(prefix, versioned_app)
 
     return parent_app
