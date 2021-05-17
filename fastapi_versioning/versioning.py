@@ -3,7 +3,6 @@ from typing import Any, Callable, Dict, List, Tuple, TypeVar, cast
 
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
-from starlette.responses import RedirectResponse, Response
 from starlette.routing import BaseRoute
 
 CallableT = TypeVar("CallableT", bound=Callable[..., Any])
