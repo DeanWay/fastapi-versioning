@@ -53,3 +53,9 @@ def get_item_v2(item_id: str) -> ItemV2:
 @version(1, 2)
 def delete_item(item_id: str) -> None:
     return None
+
+
+@router.post("/item", response_model=ItemV2)
+@version(1, 3)
+def create_item(item: ItemV2) -> ItemV2:
+    return item
