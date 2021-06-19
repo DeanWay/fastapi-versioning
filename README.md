@@ -150,12 +150,12 @@ app = VersionedFastAPI(app,
 ```
 
 
-## Custom Middleware and Decorators
+## APP Decorators
 
-All custom Middleware and Decorators should be decalared after creating a Versioned Fast API object
+All app decorators should be decalared after creating a Versioned Fast API object
 
 ```python
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi_versioning import VersionedFastAPI, version
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
@@ -196,8 +196,7 @@ app = VersionedFastAPI(app,
 #Startup event
 @app.on_event("startup")
 async def startup_db_client():
-    from firebase import initialize_app
-    app.firebase_app = initialize_app()
+    print("This runs on app Startup")
 
 #Custom Middlware
 @app.middleware("http")
