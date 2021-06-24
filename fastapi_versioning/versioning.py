@@ -57,7 +57,7 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
-            root_path=prefix,
+            root_path=parent_app.root_path.rstrip("/") + prefix,
         )
         for route in version_route_mapping[version]:
             for method in route.methods:
