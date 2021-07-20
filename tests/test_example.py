@@ -3,6 +3,7 @@ from starlette.testclient import TestClient
 from example.annotation.app import app as annotation_app
 from example.custom_default_version.app import app as default_version_app
 from example.router.app import app as router_app
+from example.major_version_only.app import app as major_version_only_app
 
 
 def test_annotation_app() -> None:
@@ -87,3 +88,17 @@ def test_default_version() -> None:
 
     assert test_client.get("/v2_0/").json() == "Hello default version 2.0!"
     assert test_client.get("/v3_0/").json() == "Hello version 3.0!"
+
+
+def test_major_version_has_not_previous_major() -> None:
+    test_client = TestClient(major_version_only_app)
+
+    assert test_client.get("/v1_0/item").json() == "Hello item version 1.0!"
+    assert test_client.get("/v1_1/item").json() == "Hello item version 1.0!"
+    assert test_client.get("/v1_1/other").json() == "Hello other version 1.1!"
+    assert test_client.get("/v2_0/another").json() == "Hello another version 2.0!"
+
+    assert test_client.get("/v1_0/another").status_code == 404
+    assert test_client.get("/v1_1/another").status_code == 404
+    assert test_client.get("/v2_0/item").status_code == 404
+    assert test_client.get("/v2_0/other").status_code == 404

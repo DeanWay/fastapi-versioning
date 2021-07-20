@@ -45,6 +45,7 @@ def VersionedFastAPI(
     ]
 
     for version, route in version_routes:
+        route.version = version
         version_route_mapping[version].append(route)
 
     unique_routes = {}
@@ -63,7 +64,8 @@ def VersionedFastAPI(
             for method in route.methods:
                 unique_routes[route.path + "|" + method] = route
         for route in unique_routes.values():
-            versioned_app.router.routes.append(route)
+            if major == route.version[0]:
+                versioned_app.router.routes.append(route)
         parent_app.mount(prefix, versioned_app)
 
         @parent_app.get(
