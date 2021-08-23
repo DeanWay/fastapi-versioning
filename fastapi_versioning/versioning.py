@@ -57,7 +57,6 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
-            root_path=prefix,
         )
         for route in version_route_mapping[version]:
             for method in route.methods:
@@ -81,7 +80,6 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
-            root_path=prefix,
         )
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
