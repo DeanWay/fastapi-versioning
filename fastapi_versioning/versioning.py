@@ -83,6 +83,6 @@ def VersionedFastAPI(
         )
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
-        parent_app.mount(prefix, versioned_app)
+        parent_app.mount(prefix, versioned_app, name="latest")
 
     return parent_app
