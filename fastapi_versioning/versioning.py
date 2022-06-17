@@ -31,6 +31,7 @@ def VersionedFastAPI(
     prefix_format: str = "/v{major}_{minor}",
     default_version: Tuple[int, int] = (1, 0),
     enable_latest: bool = False,
+    latest_prefix: str = "/latest",
     **kwargs: Any,
 ) -> FastAPI:
     parent_app = FastAPI(
@@ -73,7 +74,6 @@ def VersionedFastAPI(
             ...
 
     if enable_latest:
-        prefix = "/latest"
         major, minor = version
         semver = version_format.format(major=major, minor=minor)
         versioned_app = FastAPI(
@@ -83,6 +83,6 @@ def VersionedFastAPI(
         )
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
-        parent_app.mount(prefix, versioned_app)
+        parent_app.mount(latest_prefix, versioned_app)
 
     return parent_app
