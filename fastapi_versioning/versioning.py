@@ -59,8 +59,12 @@ def VersionedFastAPI(
             version=semver,
         )
         for route in version_route_mapping[version]:
-            for method in route.methods:
-                unique_routes[route.path + "|" + method] = route
+            try:
+                for method in route.methods:
+                    unique_routes[route.path + "|" + method] = route
+            except AttributeError:
+                unique_routes[route.path] = route
+
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
         parent_app.mount(prefix, versioned_app)
