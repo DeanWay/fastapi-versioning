@@ -37,6 +37,9 @@ def VersionedFastAPI(
         title=app.title,
         **kwargs,
     )
+    args = {arg: value for arg, value in kwargs.items() if 
+            arg not in ['title', 'description', 'version']}
+        
     version_route_mapping: Dict[Tuple[int, int], List[APIRoute]] = defaultdict(
         list
     )
@@ -57,6 +60,7 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
+            **args
         )
         for route in version_route_mapping[version]:
             for method in route.methods:
@@ -80,6 +84,7 @@ def VersionedFastAPI(
             title=app.title,
             description=app.description,
             version=semver,
+            **args
         )
         for route in unique_routes.values():
             versioned_app.router.routes.append(route)
