@@ -17,5 +17,5 @@ flake8 = "*"
 
 [packages]
 fastapi = ">=0.56.0"
-starlette = "==0.13.6"
+starlette = "==0.25.0"
 fastapi-versioning = {path = ".",editable = true}
