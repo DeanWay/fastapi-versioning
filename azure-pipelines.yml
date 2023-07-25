@@ -1,7 +1,7 @@
 # Python package
 
 trigger:
-- PROD
+- master
 
 pool:
   vmImage: ubuntu-latest
@@ -23,7 +23,7 @@ steps:
 
 - task: TwineAuthenticate@1
   inputs:
-    artifactFeed: 'APIs/fast-api-versioning'
+    artifactFeed: 'APIs/core-api-dependencies'
 
 - script: |
    twine upload -r "fast-api-versioning" --config-file $(PYPIRC_PATH) dist/*
