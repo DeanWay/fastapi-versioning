@@ -26,4 +26,4 @@ steps:
     artifactFeed: 'APIs/core-api-dependencies'
 
 - script: |
-   twine upload -r "fast-api-versioning" --config-file $(PYPIRC_PATH) dist/*
+   twine upload -r "core-api-dependencies" --config-file $(PYPIRC_PATH) dist/*
