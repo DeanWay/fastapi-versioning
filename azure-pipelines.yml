@@ -1,0 +1,29 @@
+# Python package
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.10'
+  displayName: 'Use Python 3.10'
+
+- script: |
+    python -m pip install --upgrade pip build setuptools twine
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    python -m build
+  displayName: 'build project'
+
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: 'APIs/core-api-dependencies'
+
+- script: |
+   twine upload -r "core-api-dependencies" --config-file $(PYPIRC_PATH) dist/*
