@@ -1,0 +1,29 @@
+# Python package
+
+trigger:
+- PROD
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.10'
+  displayName: 'Use Python 3.10'
+
+- script: |
+    python -m pip install --upgrade pip build setuptools twine
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    python -m build
+  displayName: 'build project'
+
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: 'APIs/fast-api-versioning'
+
+- script: |
+   twine upload -r "fast-api-versioning" --config-file $(PYPIRC_PATH) dist/*
